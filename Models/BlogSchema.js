@@ -19,7 +19,7 @@ const BlogSchema = new Schema(
       type: String,
     },
     author: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "user",
       require: [true, "Author field is required"],
     },

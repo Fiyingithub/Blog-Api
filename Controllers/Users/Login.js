@@ -40,7 +40,7 @@ const userLogin = async (req, res) => {
       JWT_SECRET
       ,
       {
-        expiresIn: "1hr",
+        expiresIn: "3days",
       }
     );
 
