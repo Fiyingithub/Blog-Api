@@ -4,14 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 
 const BlogSchema = new Schema(
   {
-    blog_Id: {
-        type: String,
-        unique: true,
-        default: uuidv4
-    },
     title: {
       type: String,
-      require: [true, "Title field is required"],
+      required: [true, "Title field is required"],
       unique: true,
       trim: true,
     },
@@ -19,9 +14,9 @@ const BlogSchema = new Schema(
       type: String,
     },
     author: {
-      type: String,
+      type: mongoose.Types.ObjectId,
       ref: "user",
-      require: [true, "Author field is required"],
+      required: [true, "Author field is required"],
     },
     state: {
       type: String,
@@ -38,7 +33,7 @@ const BlogSchema = new Schema(
     },
     body: {
       type: String,
-      require: [true, "Body field is required"],
+      required: [true, "Body field is required"],
       trim: true,
     },
   },

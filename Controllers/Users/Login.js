@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../../Models/UserSchema.js";
 import { JWT_SECRET } from "../../Config/config.js";
+import logger from "../../Utils/Logger.js";
 
 const userLogin = async (req, res) => {
   try {
@@ -16,51 +17,51 @@ const userLogin = async (req, res) => {
 
     const findExistingUser = await User.findOne({ emailAddress });
     if (!findExistingUser) {
+      logger.info("User does not exist");
       return res.status(400).json({
         status: 400,
-        message: "User Already Exist",
+        message: "User does not Exist",
         error: true,
       });
     }
 
     const isPasswordValid = bcrypt.compare(password, findExistingUser.password);
     if (!isPasswordValid) {
+      logger.info("Password does not match");
       return res.status(400).json({
         status: 400,
-        message: "Password does not match with existing Account",
+        message: "Invalid Email or Password",
         error: true,
       });
     }
 
     const generateToken = jwt.sign(
       {
-        userId: findExistingUser.userId,
+        userId: findExistingUser._id,
         emailAddress: findExistingUser.emailAddress,
       },
-      JWT_SECRET
-      ,
+      JWT_SECRET,
       {
-        expiresIn: "3days",
+        expiresIn: "1hr",
       }
     );
 
     const userDto = {
-        firstname: findExistingUser.firstname,
-        lastname: findExistingUser.lastname,
-        emailAddress: findExistingUser.emailAddress
-    }
+      firstname: findExistingUser.firstname,
+      lastname: findExistingUser.lastname,
+      emailAddress: findExistingUser.emailAddress,
+    };
 
+    logger.info(`User ${userDto.firstname} logged in successfully`);
     return res.status(200).json({
-        statu: 200,
-        message: " User Login Successfull",
-        error: false,
-        token: generateToken,
-        user: userDto
-    })
-
-
+      statu: 200,
+      message: " User Login Successfull",
+      error: false,
+      token: generateToken,
+      user: userDto,
+    });
   } catch (error) {
-    console.log(error);
+    logger.error("Error", error);
     return res.status(500).json({
       status: 500,
       message: "Internal Server Error",
@@ -69,6 +70,6 @@ const userLogin = async (req, res) => {
   }
 };
 
-const Login = userLogin
+const Login = userLogin;
 
-export default Login 
+export default Login;

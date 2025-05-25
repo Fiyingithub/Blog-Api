@@ -1,32 +1,27 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 
 
 const userSchema = new Schema({
-    userId: {
-        type: String,
-        unique: true,
-        default: uuid
-    },
     firstname: {
         type: String,
-        require: [true,'Firstname is required'],
+        required: [true,'Firstname is required'],
         trim: true,
     },
     lastname: {
         type: String,
-        require: [true,'Lastname is required'],
+        required: [true,'Lastname is required'],
         trim: true
     },
     emailAddress: {
         type: String,
-        require: [true,'Email Address is required'],
+        required: [true,'Email Address is required'],
         unique: true
     },
     password: {
         type: String,
-        require: [true, "Password Field is required"]
+        required: [true, "Password Field is required"]
     }
 })
 
