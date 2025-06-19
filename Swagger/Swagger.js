@@ -14,6 +14,10 @@ const swaggerOptions = {
     },
     servers: [
       {
+        url: "http://localhost:4219/api",
+        description: "Development server",
+      },
+      {
         url: "https://your-production-url.com",
         description: "Production server",
       },

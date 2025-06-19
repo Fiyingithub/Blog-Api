@@ -16,10 +16,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
-app.use(cors());
+
+// CORS
+const corsOptions = {
+  origin: ["*", "http://localhost:4219", "https://your-production-url.com"],
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(LoggerErrorHandler);
 app.use(LoggerRequestHandler);
-app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(
   helmet({
     contentSecurityPolicy: false,

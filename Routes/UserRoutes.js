@@ -17,17 +17,17 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - firstName
- *               - lastName
+ *               - firstname
+ *               - lastname
  *               - emailAddress
  *               - password
  *             properties:
- *               firstName:
+ *               firstname:
  *                 type: string
- *                 example: John
- *               lastName:
+ *                 example: "string"
+ *               lastname:
  *                 type: string
- *                 example: Doe
+ *                 example: "string"
  *               emailAddress:
  *                 type: string
  *                 format: email
@@ -36,7 +36,7 @@ const router = express.Router();
  *                 type: string
  *                 format: password
  *                 minLength: 8
- *                 example: password123
+ *                 example: "string"
  *     responses:
  *       201:
  *         description: User created successfully
