@@ -8,6 +8,7 @@ import LoggerErrorHandler from "./Middlewares/LoggerErrorHandler.js";
 import LoggerRequestHandler from "./Middlewares/LoggerRequestHandler.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./Swagger/Swagger.js"; // adjust path as needed
+import helmet from 'helmet'
 
 const app = express();
 
@@ -19,7 +20,11 @@ app.use(cors());
 app.use(LoggerErrorHandler);
 app.use(LoggerRequestHandler);
 app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 // DATABASE CONNECTION
 connectToDatabase;
 
