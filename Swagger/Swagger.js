@@ -18,7 +18,7 @@ const swaggerOptions = {
         description: "Development server",
       },
       {
-        url: "https://blog-api-z6ao.onrender.com",
+        url: "https://blog-api-z6ao.onrender.com/api",
         description: "Production server",
       },
     ],
