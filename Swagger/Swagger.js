@@ -15,11 +15,6 @@ const swaggerOptions = {
     servers: [
       {
         url: "http://localhost:4219/api",
-        description: "Development server",
-      },
-      {
-        url: "https://blog-api-z6ao.onrender.com/api",
-        description: "Production server",
       },
     ],
     schemes: {

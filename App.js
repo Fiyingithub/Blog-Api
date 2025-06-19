@@ -19,7 +19,7 @@ app.use("/uploads", express.static("uploads"));
 
 // CORS
 const corsOptions = {
-  origin: ["*", "http://localhost:4219", "https://blog-api-z6ao.onrender.com/api"],
+  origin: ["*", "http://localhost:4219"],
   credentials: true,
   optionSuccessStatus: 200,
 };
